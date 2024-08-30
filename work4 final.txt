@@ -1,0 +1,285 @@
+(import javax.swing.*)
+(import java.awt.*)
+(import java.awt.event.*)
+(import javax.imageio.*)
+(import java.io.*)
+(import  java.lang.String.*)
+
+(deftemplate T1 (slot vp1))
+(deftemplate T (slot time))
+
+(defglobal ?*frame* = 0)
+(defglobal ?*frame1* = 0)
+(defglobal ?*sumpanel* = 0)
+
+(defglobal ?*VP-500* = 0)
+(defglobal ?*VP-1000* = 0)
+(defglobal ?*VP-2000* = 0)
+(defglobal ?*VP-4000* = 0)
+(defglobal ?*VP-8000* = 0)
+(defglobal ?*VP-16000* = 0)
+
+(defglobal ?*sel* = "Select your want to pay")
+
+(defglobal ?*payment*  = 0)
+(defglobal ?*iconpay*  = 0)
+(defglobal ?*iconpay1*  = 0)
+(defglobal ?*iconpay2*  = 0)
+(defglobal ?*iconpay3*  = 0)
+(defglobal ?*iconpay4*  = 0)
+(defglobal ?*iconpay5*  = 0)
+(defglobal ?*iconpay6*  = 0)
+
+(defglobal ?*space15* =0)
+
+ (set-reset-globals FALSE)
+    (defglobal ?*CRLF* = (call java.lang.System getProperty "line.separator"))
+
+(bind ?*frame* (new JFrame "WELCOME TO HITORI SHOP"))
+    (?*frame* setSize 1000 800)
+    (?*frame* setDefaultCloseOperation (get-member JFrame EXIT_ON_CLOSE))
+    (?*frame* setResizable FALSE)
+
+
+(bind ?*frame1* (new JFrame "PAYMENT"))
+    (?*frame1* setSize 550 550)
+    (?*frame1* setDefaultCloseOperation (get-member JFrame DISPOSE_ON_CLOSE))
+    (?*frame1* setResizable TRUE)
+
+ (bind ?*sumpane* (?*frame* getContentPane))
+ (bind ?*sumpane1* (?*frame1* getContentPane))
+
+(bind ?*SELECTVP1* (new JPanel))
+(bind ?*VP-500* (new JRadioButton "450 THB"))
+(bind ?*VP-1000* (new JRadioButton "850 THB"))
+(bind ?*VP-2000* (new JRadioButton "1,500 THB"))
+
+
+(bind ?*SELECTVP2* (new JPanel))
+(bind ?*VP-4000* (new JRadioButton "2,900 THB"))
+(bind ?*VP-8000* (new JRadioButton "5,750 THB"))
+(bind ?*VP-16000* (new JRadioButton "11,250 THB"))
+(bind ?group1 (new ButtonGroup))
+(?group1 add ?*VP-500*)
+(?group1 add ?*VP-1000*)
+(?group1 add ?*VP-2000*)
+(?group1 add ?*VP-4000*)
+(?group1 add ?*VP-8000*)
+(?group1 add ?*VP-16000*)
+
+(bind ?*image* (call ImageIO read (new File "C:/image/LOGO_SHOP250_.png")))
+(bind ?*icon* (new ImageIcon ?*image*))
+(bind ?*im* (new JLabel))
+(?*im* setIcon ?*icon*)
+(bind ?*endim* (new JPanel))
+(?*endim* add ?*im*)
+
+(bind ?*TextSelect* (new JPanel))
+(bind ?*text* (new JLabel "SELECT VALORANT POINT'S"))
+
+(?*TextSelect* add ?*text*)
+
+(bind ?*space* (new JPanel))
+(bind ?*space2* (new JPanel))
+
+(bind ?*image1* (call ImageIO read (new File "C:/image/500.png")))
+(bind ?*icon1* (new ImageIcon ?*image1*))
+(bind ?*im1* (new JLabel))
+(?*im1* setIcon ?*icon1*)
+(bind ?*image2* (call ImageIO read (new File "C:/image/1000.png")))
+(bind ?*icon2* (new ImageIcon ?*image2*))
+(bind ?*im2* (new JLabel))
+(?*im2* setIcon ?*icon2*)
+(bind ?*image3* (call ImageIO read (new File "C:/image/2000.png")))
+(bind ?*icon3* (new ImageIcon ?*image3*))
+(bind ?*im3* (new JLabel))
+(?*im3* setIcon ?*icon3*)
+(bind ?*image4* (call ImageIO read (new File "C:/image/4000.png")))
+(bind ?*icon4* (new ImageIcon ?*image4*))
+(bind ?*im4* (new JLabel))
+(?*im4* setIcon ?*icon4*)
+(bind ?*image5* (call ImageIO read (new File "C:/image/8000.png")))
+(bind ?*icon5* (new ImageIcon ?*image5*))
+(bind ?*im5* (new JLabel))
+(?*im5* setIcon ?*icon5*)
+(bind ?*image6* (call ImageIO read (new File "C:/image/16000.png")))
+(bind ?*icon6* (new ImageIcon ?*image6*))
+(bind ?*im6* (new JLabel))
+(?*im6* setIcon ?*icon6*)
+
+(bind ?*allimage3-top* (new JPanel))
+(?*allimage3-top* add ?*im1*)
+(?*allimage3-top* add ?*im2*)
+(?*allimage3-top* add ?*im3*)
+(bind ?*allimage3-under* (new JPanel))
+(?*allimage3-under* add ?*im4*)
+(?*allimage3-under* add ?*im5*)
+(?*allimage3-under* add ?*im6*)
+
+
+(bind ?*space3* (new JPanel ))
+(bind ?*text2* (new JLabel "                                         "))
+(?*space3* add ?*text2*)
+(?*space3* setLayout (new BoxLayout ?*space3* (get-member BoxLayout X_AXIS)))
+
+(bind ?*space4* (new JPanel))
+(bind ?*text3* (new JLabel "                                         "))
+(?*space4* add ?*text3*)
+(?*space4* setLayout (new BoxLayout ?*space4* (get-member BoxLayout X_AXIS)))
+
+(bind ?*space5* (new JPanel))
+(bind ?*text4* (new JLabel "                                         "))
+(?*space5* add ?*text4*)
+(?*space5* setLayout (new BoxLayout ?*space5* (get-member BoxLayout X_AXIS)))
+
+(bind ?*space6* (new JPanel))
+(bind ?*text5* (new JLabel "                                         "))
+(?*space6* add ?*text5*)
+(?*space6* setLayout (new BoxLayout ?*space6* (get-member BoxLayout X_AXIS)))
+
+(?*SELECTVP1* add ?*VP-500*)
+(?*SELECTVP1* add ?*space3*)
+(?*SELECTVP1* add ?*VP-1000*)
+(?*SELECTVP1* add ?*space4*)
+(?*SELECTVP1* add ?*VP-2000*)
+
+
+(?*SELECTVP2* add ?*VP-4000*)
+(?*SELECTVP2* add ?*space5*)
+(?*SELECTVP2* add ?*VP-8000*)
+(?*SELECTVP2* add ?*space6*)
+(?*SELECTVP2* add ?*VP-16000*)
+
+
+(bind ?*VP* (new JPanel))
+
+(?*VP* add ?*endim*)
+(?*VP* add ?*TextSelect*)
+(?*VP* add ?*space*)
+(?*VP* add ?*allimage3-top*)
+(?*VP* add ?*SELECTVP1*)
+(?*VP* add ?*space2*)
+(?*VP* add ?*allimage3-under*)
+(?*VP* add ?*SELECTVP2*)
+(?*VP* setLayout (new BoxLayout ?*VP* (get-member BoxLayout Y_AXIS)))
+
+(bind ?*pay* (call ImageIO read (new File "C:/image/payment(1).png ")))
+  (bind ?*iconpay* (new ImageIcon ?*pay*))
+(bind ?*pay1* (call ImageIO read (new File "C:/image/payment(1).png ")))
+  (bind ?*iconpay1* (new ImageIcon ?*pay1*))
+(bind ?*pay2* (call ImageIO read (new File "C:/image/payment(2).png ")))
+  (bind ?*iconpay2* (new ImageIcon ?*pay2*))
+(bind ?*pay3* (call ImageIO read (new File "C:/image/payment(3).png ")))
+  (bind ?*iconpay3* (new ImageIcon ?*pay3*))
+(bind ?*pay4* (call ImageIO read (new File "C:/image/payment(4).png")))
+  (bind ?*iconpay4* (new ImageIcon ?*pay4*))
+(bind ?*pay5* (call ImageIO read (new File "C:/image/payment(5).png")))
+  (bind ?*iconpay5* (new ImageIcon ?*pay5*))
+(bind ?*pay6* (call ImageIO read (new File "C:/image/payment(6).png ")))
+  (bind ?*iconpay6* (new ImageIcon ?*pay6*))
+(bind ?*payment* (new JLabel))
+(?*payment* setIcon ?*iconpay*)
+(bind ?*paymentall* (new JPanel))
+(?*paymentall* add ?*payment*)
+
+(bind ?panelbutton (new JPanel))
+  (bind ?*buttonSub* (new JButton "SUBMIT"))
+   (?panelbutton add ?*buttonSub*)
+
+  (bind ?*VPALL* (new JPanel))
+  (?*VPALL* add ?*VP* (get-member BorderLayout CENTER)) 
+
+  (?*VPALL* setLayout (new BoxLayout ?*VPALL* (get-member BoxLayout Y_AXIS)))
+
+(?*sumpane* add ?*VPALL* (get-member BorderLayout NORTH))
+(?*sumpane* add ?panelbutton (get-member BorderLayout SOUTH))
+(?*sumpane1* add ?*paymentall* (get-member BorderLayout CENTER))
+
+(bind ?handler (new jess.awt.ActionListener buttonSub(engine)))
+  (?*buttonSub* addActionListener ?handler)
+
+
+ (?*frame* setVisible TRUE)
+    (?*frame* validate)
+    (?*frame* repaint)
+
+(deffunction BOX(?e1) (call JOptionPane showMessageDialog ?*frame* ?e1"WORNING" (get-member JOptionPane PLAIN_MESSAGE)))
+
+
+    (deffunction buttonSub(?EVENT)
+	(if (?*VP-500* isSelected) then
+	    (assert  (T(time a)))
+	elif (?*VP-1000* isSelected) then
+	    (assert  (T(time b)))
+	elif (?*VP-2000* isSelected) then
+	    (assert  (T(time c)))
+	elif (?*VP-4000* isSelected) then
+	    (assert  (T(time d)))
+	elif (?*VP-8000* isSelected) then
+	    (assert  (T(time e)))
+	elif (?*VP-16000* isSelected) then
+	    (assert  (T(time f)))
+	else
+	(assert  (T(time g)))
+)
+(run)
+)
+
+(defrule T1
+?s1 <- (T(time a))
+=>
+(retract ?s1)
+(?*payment* setIcon ?*iconpay1*)
+(?*frame1* setVisible TRUE)
+)
+
+(defrule T2
+?s1 <- (T(time b))
+=>
+(retract ?s1)
+(?*payment* setIcon ?*iconpay2*)
+(?*frame1* setVisible TRUE)
+)
+
+(defrule T3
+?s1 <- (T(time c))
+=>
+(retract ?s1)
+(?*payment* setIcon ?*iconpay3*)
+(?*frame1* setVisible TRUE)
+)
+
+(defrule T4
+?s1 <- (T(time d))
+=>
+(retract ?s1)
+(?*payment* setIcon ?*iconpay4*)
+(?*frame1* setVisible TRUE)
+)
+
+(defrule T5
+?s1 <- (T(time e))
+=>
+(retract ?s1)
+(?*payment* setIcon ?*iconpay5*)
+(?*frame1* setVisible TRUE)
+)
+
+(defrule T6
+?s1 <- (T(time f))
+=>
+(retract ?s1)
+(?*payment* setIcon ?*iconpay6*)
+(?*frame1* setVisible TRUE)
+)
+
+
+(defrule T7 
+ ?s1 <- (T(time g))
+ => 
+  (retract ?s1)
+  (BOX "Please select Top up."  crlf)
+ )
+
+(reset)
+(run)

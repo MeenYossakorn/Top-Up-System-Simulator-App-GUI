@@ -1,0 +1,1 @@
+Please place the program file 'image' in 'C:/....' before using it.
